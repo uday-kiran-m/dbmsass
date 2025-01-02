@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookStars</title>
+    <link rel="stylesheet" href="page3.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><h1>BookHub</h1></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="page3.html">BookStars</a></li>
+                    <li><a href="page1.html">Books</a></li>
+                    <li><a href="page2.html">Borrows</a></li>
+                    <li><a href="#">Account</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="bookstars">
+        <div class="container">
+            <h2>BookStars</h2>
+            <div class="search-bar-container">
+                <input type="text" id="search-bar" placeholder="Search for Borrowers..." onkeyup="showSuggestions(this.value)">
+                <ul id="suggestions" class="suggestions-list"></ul>
+            </div>
+            <script>
+                const borrowers = [
+                    "John Doe",
+                    "Jane Smith",
+                    "Michael Brown",
+                    "Sarah Johnson",
+                    "Emily Davis"
+                ];
+            
+                function showSuggestions(query) {
+                    const suggestions = document.getElementById('suggestions');
+                    suggestions.innerHTML = '';
+                    if (query.length > 0) {
+                        const matches = borrowers.filter(borrower => borrower.toLowerCase().includes(query.toLowerCase()));
+                        matches.forEach(match => {
+                            const li = document.createElement('li');
+                            li.textContent = match;
+                            li.onclick = () => {
+                                document.getElementById('search-bar').value = match;
+                                suggestions.innerHTML = '';
+                            };
+                            suggestions.appendChild(li);
+                        });
+                    }
+                }
+            </script>
+            <div class="add-borrow">
+                <h3>Add New Borrow</h3>
+                <form>
+                    <input type="text" placeholder="Borrower Name" required>
+                    <input type="text" placeholder="Book Title" required>
+                    <input type="date" placeholder="Date Borrowed" required>
+                    <input type="date" placeholder="Return Date" required>
+                    <button type="submit">Add Borrow</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+
+
+</body>
+</html>
