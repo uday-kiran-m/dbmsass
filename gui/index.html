@@ -3,9 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>BookHub</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    Hello world
+    <!-- Header and Navigation Bar -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>BookHub</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="page3.html">BookStars</a></li>
+                    <li><a href="page1.html">Books</a></li>
+                    <li><a href="page2.html">Borrows</a></li>
+                    <li><a href="#">Account</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Featured Content Banner -->
+    <section class="featured">
+        <div class="container">
+            <h2>Latest Content</h2>
+            <div class="banner">Latest Magazines, Articles...</div>
+        </div>
+    </section>
+
+    <!-- Search Bar -->
+    <section class="search-filter">
+        <div class="container">
+            <!-- Search bar -->
+            <input type="text" name="query" placeholder="Search for Books, Author etc..." class="search-bar" id="searchBar">
+        </div>
+    </section>
+    
+    <script>
+        // JavaScript to redirect to page4.html when the search bar is clicked
+        document.getElementById('searchBar').addEventListener('focus', function() {
+            window.location.href = 'page4.html';
+        });
+    </script>
+
+    <!-- Your Library -->
+    <section class="library">
+        <div class="container">
+            <div class="library-grid">
+                <div class="card">
+                    <h4>NO.1</h4>
+                    <img src="https://via.placeholder.com/300x200" alt="Content Thumbnail">
+                    <div class="card-actions">
+                        <button class="action-btn">BookName</button>
+                        <button class="action-btn">Author</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <h4>NO.2</h4>
+                    <img src="https://via.placeholder.com/300x200" alt="Content Thumbnail">
+                    <div class="card-actions">
+                        <button class="action-btn">BookName</button>
+                        <button class="action-btn">Author</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <h4>NO.3</h4>
+                    <img src="https://via.placeholder.com/300x200" alt="Content Thumbnail">
+                    <div class="card-actions">
+                        <button class="action-btn">BookName</button>
+                        <button class="action-btn">Author</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <h4>NO.4</h4>
+                    <img src="https://via.placeholder.com/300x200" alt="Content Thumbnail">
+                    <div class="card-actions">
+                        <button class="action-btn">BookName</button>
+                        <button class="action-btn">Author</button>
+                    </div>
+                </div>
+            </div>
+            <div class="load-more">
+                <a href="page1.html"><button>Show All</button></a>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

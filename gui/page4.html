@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Books</title>
+    <link rel="stylesheet" href="page4.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><h1>BookHub</h1></a>
+            </div>
+        </div>
+    </header>
+
+    <section class="search-section">
+        <div class="container">
+            <h2>Search for Books</h2>
+            <input type="text" id="search-bar" placeholder="Search by title or author..." oninput="showSuggestions(this.value)">
+            <ul id="suggestions"></ul>
+        </div>
+    </section>
+
+    <script>
+        const books = [
+            "The Great Gatsby",
+            "To Kill a Mockingbird",
+            "1984",
+            "Pride and Prejudice",
+            "Moby Dick",
+            "War and Peace",
+            "Hamlet",
+            "The Odyssey"
+        ];
+
+        function showSuggestions(query) {
+            const suggestions = document.getElementById('suggestions');
+            suggestions.innerHTML = '';
+            if (query.length > 0) {
+                const matches = books.filter(book => {
+                    return book.split(' ').some(word => word.toLowerCase().startsWith(query.toLowerCase()));
+                });
+                matches.forEach(match => {
+                    const li = document.createElement('li');
+                    li.textContent = match;
+                    li.onclick = () => {
+                        document.getElementById('search-bar').value = match;
+                        suggestions.innerHTML = '';
+                    };
+                    suggestions.appendChild(li);
+                });
+            }
+        }
+
+        // Function to get query parameter from URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Auto-fill the search bar and display suggestions if query exists
+        document.addEventListener('DOMContentLoaded', () => {
+            const query = getQueryParam('query');
+            if (query) {
+                const searchBar = document.getElementById('search-bar');
+                searchBar.value = query;
+                showSuggestions(query);
+            }
+        });
+    </script>
+</body>
+</html>
