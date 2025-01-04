@@ -1,0 +1,103 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Header styling */
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: #000;
+    padding: 20px 0;
+}
+
+.container {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 30px;
+    color: #FF9C00;
+    text-transform: uppercase;
+}
+
+/* Edit Details Section */
+.login-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    text-align: center;
+}
+
+.login-section h2 {
+    margin-bottom: 20px;
+    font-size: 36px;
+    color: #FF9C00;
+}
+
+.login-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 400px;
+    align-items: center;
+}
+
+.login-section input {
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+}
+
+.login-section input:focus {
+    outline: none;
+    box-shadow: 0 0 5px #FF9C00;
+}
+
+.login-section button {
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #121212;
+    background-color: #FF9C00;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.login-section button:hover {
+    background-color: #e88500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .login-section form {
+        width: 90%;
+    }
+}
