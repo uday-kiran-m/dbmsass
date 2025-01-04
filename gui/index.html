@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BookHub</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script type="text/javascript" src="/eel.js"></script>
 </head>
 <body>
     <!-- Header and Navigation Bar -->
@@ -16,7 +17,7 @@
             <nav>
                 <ul>
                     <li><a href="page3.html">BookStars</a></li>
-                    <li><a href="page1.html">Books</a></li>
+                    <li><a href="bookshelf.html">Books</a></li>
                     <li><a href="page2.html">Borrows</a></li>
                     <li><a href="#">Account</a></li>
                 </ul>
@@ -50,44 +51,60 @@
     <!-- Your Library -->
     <section class="library">
         <div class="container">
-            <div class="library-grid">
-                <div class="card">
-                    <h4>NO.1</h4>
-                    <img src="https://via.placeholder.com/300x200" alt="Content Thumbnail">
-                    <div class="card-actions">
-                        <button class="action-btn">BookName</button>
-                        <button class="action-btn">Author</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <h4>NO.2</h4>
-                    <img src="https://via.placeholder.com/300x200" alt="Content Thumbnail">
-                    <div class="card-actions">
-                        <button class="action-btn">BookName</button>
-                        <button class="action-btn">Author</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <h4>NO.3</h4>
-                    <img src="https://via.placeholder.com/300x200" alt="Content Thumbnail">
-                    <div class="card-actions">
-                        <button class="action-btn">BookName</button>
-                        <button class="action-btn">Author</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <h4>NO.4</h4>
-                    <img src="https://via.placeholder.com/300x200" alt="Content Thumbnail">
-                    <div class="card-actions">
-                        <button class="action-btn">BookName</button>
-                        <button class="action-btn">Author</button>
-                    </div>
-                </div>
+            <div id="libgrid" class="library-grid" onload="loadBooks()">
             </div>
             <div class="load-more">
-                <a href="page1.html"><button>Show All</button></a>
+                <a href="bookshelf.html"><button>Show All</button></a>
             </div>
         </div>
     </section>
 </body>
+<script>
+    function loadBooks(){
+        eel.listBooks()(disp_books)
+    }
+    function disp_books(books){
+        console.log(books)
+        if(books.length >5){
+            books = books.slice(0,5)
+        }
+        libraryGrid = document.getElementById("libgrid")
+        books.forEach((book, index) => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            
+            // Book number
+            const number = document.createElement('h4');
+            number.textContent = `NO.${index + 1}`;
+            card.appendChild(number);
+            
+            // Book image
+            const image = document.createElement('img');
+            image.src = "data:image/jpeg;base64,"+book[4];
+            image.alt = 'Content Thumbnail';
+            card.appendChild(image);
+            
+            // Book actions
+            const cardActions = document.createElement('div');
+            cardActions.classList.add('card-actions');
+            
+            const nameButton = document.createElement('button');
+            nameButton.classList.add('action-btn');
+            nameButton.textContent = book[1];
+            
+            const authorButton = document.createElement('button');
+            authorButton.classList.add('action-btn');
+            authorButton.textContent = book[2];
+            
+            cardActions.appendChild(nameButton);
+            cardActions.appendChild(authorButton);
+            card.appendChild(cardActions);
+            
+            // Append card to library grid
+            libraryGrid.appendChild(card);
+        }); 
+        
+    }
+    loadBooks();
+</script>
 </html>
