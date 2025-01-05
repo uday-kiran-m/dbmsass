@@ -3,8 +3,8 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f9fa; /* Light background color */
-    color: #212529; /* Dark text color */
+    background-color: #f8f9fa; /* Light background */
+    color: #212529; /* Dark text */
 }
 
 .container {
@@ -71,19 +71,19 @@ h2 {
 }
 
 .book-item {
-    background-color: #fff; /* White card background */
-    border: 1px solid #dee2e6; /* Light border */
+    background-color: #fff;
+    border: 1px solid #dee2e6;
     border-radius: 8px;
     padding: 15px;
     width: 200px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
 }
 
 .book-item:hover {
-    transform: translateY(-5px); /* Lift effect */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Deeper shadow */
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .book-item img {
@@ -96,12 +96,12 @@ h2 {
 .book-item h3 {
     font-size: 18px;
     margin: 10px 0;
-    color: #495057; /* Dark gray text */
+    color: #495057;
 }
 
 .book-item p {
     font-size: 14px;
-    color: #6c757d; /* Lighter gray text */
+    color: #6c757d;
     margin: 5px 0;
 }
 
@@ -110,8 +110,8 @@ h2 {
 }
 
 button {
-    background-color: #343a40; /* Dark button background */
-    color: #fff; /* White text */
+    background-color: #343a40;
+    color: #fff;
     border: none;
     padding: 8px 12px;
     cursor: pointer;
@@ -122,8 +122,8 @@ button {
 }
 
 button:hover {
-    background-color: #ffc107; /* Highlight button color on hover */
-    color: #343a40; /* Dark text on hover */
+    background-color: #ffc107;
+    color: #343a40;
 }
 
 /* Add Book Section */
@@ -139,7 +139,7 @@ button:hover {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #495057; /* Dark gray label text */
+    color: #495057;
 }
 
 .add-book form input,
@@ -147,27 +147,27 @@ button:hover {
     width: 100%;
     margin-bottom: 15px;
     padding: 10px;
-    border: 1px solid #ced4da; /* Light border */
+    border: 1px solid #ced4da;
     border-radius: 4px;
     font-size: 14px;
 }
 
 .add-book form input:focus {
-    border-color: #ffc107; /* Highlight border on focus */
+    border-color: #ffc107;
     outline: none;
     box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
 }
 
 .add-book form button {
-    background-color: #343a40; /* Dark button background */
-    color: #fff; /* White text */
+    background-color: #343a40;
+    color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .add-book form button:hover {
-    background-color: #ffc107; /* Highlight button color on hover */
-    color: #343a40; /* Dark text on hover */
+    background-color: #ffc107;
+    color: #343a40;
 }
 
 /* Responsive Design */
