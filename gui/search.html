@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Books</title>
-    <link rel="stylesheet" href="css/page4.css">
+    <link rel="stylesheet" href="css/search.css">
     <script type="text/javascript" src="/eel.js"></script>
 </head>
 <body>
@@ -25,29 +25,21 @@
     </section>
 
     <script>
-        const books = [
-            "The Great Gatsby",
-            "To Kill a Mockingbird",
-            "1984",
-            "Pride and Prejudice",
-            "Moby Dick",
-            "War and Peace",
-            "Hamlet",
-            "The Odyssey"
-        ];
+        let books = [];
+        eel.listBooks()().then(function(b) {books = b;})
 
         function showSuggestions(query) {
             const suggestions = document.getElementById('suggestions');
             suggestions.innerHTML = '';
             if (query.length > 0) {
                 const matches = books.filter(book => {
-                    return book.split(' ').some(word => word.toLowerCase().startsWith(query.toLowerCase()));
+                    return book[1].split(' ').some(word => word.toLowerCase().startsWith(query.toLowerCase()));
                 });
                 matches.forEach(match => {
                     const li = document.createElement('li');
-                    li.textContent = match;
+                    li.textContent = match[1];
                     li.onclick = () => {
-                        document.getElementById('search-bar').value = match;
+                        document.getElementById('search-bar').value = match[1];
                         suggestions.innerHTML = '';
                     };
                     suggestions.appendChild(li);
