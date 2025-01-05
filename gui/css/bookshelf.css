@@ -87,14 +87,22 @@ button[type="submit"] {
     padding: 30px 0;
 }
 
+.library-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
 .book-item {
     background-color: #1c1c1c;
-    margin: 15px 0;
     padding: 20px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 220px;
+    text-align: center;
 }
 
 .book-item h3 {
@@ -114,49 +122,37 @@ button[type="submit"] {
     margin-bottom: 15px;
 }
 
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
 button {
     background-color: #FF9C00;
     border: none;
     padding: 10px 20px;
     color: #121212;
     border-radius: 5px;
-    margin-right: 10px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
     background-color: #FF7F00;
 }
 
-.library-grid {
-    display: flex;
-    gap: 20px;
-    padding-bottom: 20px; /* For some space below the cards */
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 15px;
-}
-
-h2 {
-    margin: 15px;
-}
-
 body::-webkit-scrollbar {
     display: none;
 }
 
-/* Additional responsive design */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
     .book-item {
         width: 100%;
     }
 
-    form {
-        width: 100%;
+    .button-container {
+        flex-direction: column;
+        gap: 5px;
     }
 }
