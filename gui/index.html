@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BookHub</title>
     <link rel="stylesheet" href="css/index.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
     <script type="text/javascript" src="/eel.js"></script>
 </head>
 <body>
@@ -92,8 +96,8 @@
             nameButton.classList.add('action-btn');
             nameButton.textContent = book[1];
             
-            const authorButton = document.createElement('button');
-            authorButton.classList.add('action-btn');
+            const authorButton = document.createElement('p');
+            authorButton.classList.add('action-btn2');
             authorButton.textContent = book[2];
             
             cardActions.appendChild(nameButton);

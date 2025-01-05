@@ -20,6 +20,9 @@ header .logo h1 {
     font-size: 30px;
     color: #FF9C00;
 }
+a, u {
+    text-decoration: none;
+  }
 
 header .logo a {
     text-decoration: none;

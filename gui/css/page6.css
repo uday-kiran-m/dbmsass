@@ -15,7 +15,9 @@ body {
     justify-content: center;
     align-items: center;
 }
-
+a, u {
+    text-decoration: none;
+  }
 /* Header styling */
 header {
     position: absolute;
