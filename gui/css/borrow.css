@@ -1,9 +1,15 @@
+/* General reset for margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and overall layout */
 body {
     font-family: Arial, sans-serif;
     background-color: #121212;
     color: #fff;
-    margin: 0;
-    padding: 0;
 }
 a, u {
     text-decoration: none;
@@ -21,15 +27,16 @@ header {
     align-items: center;
 }
 
-.logo h1 {
-    color: #FF9C00;
+.logo h1 a {
     font-size: 30px;
+    color: #FF9C00;
+    text-decoration: none;
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: 30px;
 }
 
 nav ul li a {
@@ -39,22 +46,107 @@ nav ul li a {
     text-transform: uppercase;
 }
 
-.borrow-list {
+/* Borrowers Section */
+.borrowers-section {
     padding: 30px 0;
 }
 
-table {
+.borrowers-section h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #FF9C00;
+}
+
+.borrowers-table {
     width: 100%;
     border-collapse: collapse;
+    margin-bottom: 30px;
 }
 
-table th, table td {
-    border: 1px solid #fff;
-    padding: 10px;
-    text-align: left;
+.borrowers-table th,
+.borrowers-table td {
+    border: 1px solid #333;
+    padding: 12px;
+    text-align: center;
+    font-size: 16px;
 }
 
-table th {
+.borrowers-table th {
+    background-color: #1c1c1c;
+    color: #FF9C00;
+    text-transform: uppercase;
+}
+
+.borrowers-table tr:nth-child(even) {
+    background-color: #1c1c1c;
+}
+
+.borrowers-table tr:nth-child(odd) {
+    background-color: #333;
+}
+
+.borrowers-table td {
+    color: #fff;
+}
+
+.edit-btn,
+.delete-btn {
     background-color: #FF9C00;
+    border: none;
+    padding: 8px 15px;
     color: #121212;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+    background-color: #e88500;
+}
+
+/* Edit Borrower Form */
+.edit-borrower-form {
+    background-color: #1c1c1c;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    display: none;
+}
+
+.edit-borrower-form h3 {
+    font-size: 24px;
+    color: #FF9C00;
+    margin-bottom: 20px;
+}
+
+.edit-borrower-form input {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+}
+
+.edit-borrower-form button {
+    background-color: #FF9C00;
+    border: none;
+    padding: 12px 20px;
+    color: #121212;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-borrower-form button:hover {
+    background-color: #e88500;
 }

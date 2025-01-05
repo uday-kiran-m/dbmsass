@@ -15,20 +15,52 @@
     <header>
         <div class="container">
             <div class="logo">
-                <a href="index.html"><h1>BookHub</h1></a>
+                <h1><a href="index.html" style="text-decoration: none; color: #FF9C00;">LibraryHub</a></h1>
             </div>
         </div>
     </header>
 
     <section class="login-section">
-        <h2>Edit Your Details</h2>
-        <form action="#" method="POST">
-            <input type="text" name="username" placeholder="New Username" required>
-            <input type="password" name="password" placeholder="New Password" required>
+        <h2>Edit Details</h2>
+        <form id="editForm">
+            <input type="text" id="name" placeholder="Enter your name" required>
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <input type="text" id="phone" placeholder="Enter your phone number" required>
             <button type="submit">Save Changes</button>
-            <button type="submit"><a href="page5.html">Back</a></button>
         </form>
+        <div id="userDetails" style="display: none; margin-top: 20px;">
+            <h2>Updated User Details</h2>
+            <p id="updatedName"></p>
+            <p id="updatedEmail"></p>
+            <p id="updatedPhone"></p>
+            <a href="page5.html"><button>Back to Account</button></a>
+        </div>
     </section>
 
+    <script>
+        const editForm = document.getElementById('editForm');
+        const userDetails = document.getElementById('userDetails');
+        const updatedName = document.getElementById('updatedName');
+        const updatedEmail = document.getElementById('updatedEmail');
+        const updatedPhone = document.getElementById('updatedPhone');
+
+        editForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent form submission
+
+            // Get input values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            // Update user details section
+            updatedName.textContent = `Name: ${name}`;
+            updatedEmail.textContent = `Email: ${email}`;
+            updatedPhone.textContent = `Phone: ${phone}`;
+
+            // Hide form and show updated details
+            editForm.style.display = 'none';
+            userDetails.style.display = 'block';
+        });
+    </script>
 </body>
 </html>

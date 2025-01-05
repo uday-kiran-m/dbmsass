@@ -12,35 +12,36 @@
 <link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
-    <!-- Header and Navigation Bar -->
+    <!-- Header Section -->
     <header>
         <div class="container">
             <div class="logo">
-                <a href="index.html"><h1>BookHub</h1></a>
+                <h1><a href="index.html">BookHub</a></h1>
             </div>
             <nav>
                 <ul>
                     <li><a href="bookstars.html">BookStars</a></li>
-                    <li><a href="bookshelf.html">Bookshelf</a></li>
-                    <li><a href="borrow.html" class="active">Borrows</a></li>
+                    <li><a href="bookshelf.html">BookShelf</a></li>
+                    <li><a href="borrow.html">Borrows</a></li>
                     <li><a href="page5.html">Account</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Borrower List Section -->
-    <section class="borrowers">
+    <!-- Borrowers Section -->
+    <section class="borrowers-section">
         <div class="container">
-            <h2>Borrower List</h2>
-            <table>
+            <h2>Borrowers List</h2>
+            <table class="borrowers-table">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>ID</th>
                         <th>Name</th>
-                        <th>Book Borrowed</th>
-                        <th>Borrow Date</th>
-                        <th>Return Date</th>
+                        <th>Book</th>
+                        <th>Borrowed Date</th>
+                        <th>Due Date</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,24 +51,73 @@
                         <td>The Great Gatsby</td>
                         <td>2025-01-01</td>
                         <td>2025-01-15</td>
+                        <td>
+                            <button class="edit-btn" onclick="editRow(this)">Edit</button>
+                            <button class="delete-btn" onclick="deleteRow(this)">Delete</button>
+                        </td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td>Jane Smith</td>
-                        <td>To Kill a Mockingbird</td>
+                        <td>1984</td>
                         <td>2025-01-03</td>
                         <td>2025-01-17</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Michael Brown</td>
-                        <td>1984</td>
-                        <td>2025-01-05</td>
-                        <td>2025-01-19</td>
+                        <td>
+                            <button class="edit-btn" onclick="editRow(this)">Edit</button>
+                            <button class="delete-btn" onclick="deleteRow(this)">Delete</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
+
+            <!-- Edit Borrower Form -->
+            <div class="edit-borrower-form" id="editForm" style="display: none;">
+                <h3>Edit Borrower</h3>
+                <form onsubmit="updateRow(event)">
+                    <input type="text" id="editName" placeholder="Name" required>
+                    <input type="text" id="editBook" placeholder="Book" required>
+                    <input type="date" id="editBorrowedDate" required>
+                    <input type="date" id="editDueDate" required>
+                    <button type="submit">Update</button>
+                    <button type="button" onclick="cancelEdit()">Cancel</button>
+                </form>
+            </div>
         </div>
     </section>
+
+    <script>
+        let currentRow;
+
+        function editRow(button) {
+            const row = button.parentElement.parentElement;
+            currentRow = row;
+
+            document.getElementById("editName").value = row.cells[1].textContent;
+            document.getElementById("editBook").value = row.cells[2].textContent;
+            document.getElementById("editBorrowedDate").value = row.cells[3].textContent;
+            document.getElementById("editDueDate").value = row.cells[4].textContent;
+
+            document.getElementById("editForm").style.display = "block";
+        }
+
+        function updateRow(event) {
+            event.preventDefault();
+
+            currentRow.cells[1].textContent = document.getElementById("editName").value;
+            currentRow.cells[2].textContent = document.getElementById("editBook").value;
+            currentRow.cells[3].textContent = document.getElementById("editBorrowedDate").value;
+            currentRow.cells[4].textContent = document.getElementById("editDueDate").value;
+
+            document.getElementById("editForm").style.display = "none";
+        }
+
+        function deleteRow(button) {
+            button.parentElement.parentElement.remove();
+        }
+
+        function cancelEdit() {
+            document.getElementById("editForm").style.display = "none";
+        }
+    </script>
 </body>
 </html>
