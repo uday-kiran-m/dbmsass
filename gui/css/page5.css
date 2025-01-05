@@ -37,6 +37,9 @@ header {
     font-size: 30px;
     color: #FF9C00;
 }
+a, u {
+    text-decoration: none;
+  }
 
 nav ul {
     list-style: none;

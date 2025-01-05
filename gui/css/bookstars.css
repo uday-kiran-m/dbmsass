@@ -133,6 +133,9 @@ nav ul li a {
     color: #fff;
     font-size: 16px;
 }
+a, u {
+    text-decoration: none;
+  }
 
 .add-borrower-form button {
     background-color: #FF9C00;

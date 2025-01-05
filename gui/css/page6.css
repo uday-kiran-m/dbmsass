@@ -16,8 +16,10 @@ body {
     min-height: 100vh;
     margin: 0;
 }
-
-/* Header */
+a, u {
+    text-decoration: none;
+  }
+/* Header styling */
 header {
     width: 100%;
     background-color: #000;

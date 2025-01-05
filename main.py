@@ -159,12 +159,14 @@ def listBorrowers(username=None):
     res = mycurs.execute(f"select * from BookStars where staff=0 {f"and username like '%{username}%'" if username else ""}")
     return res
 
+@eel.expose
 def updateBorrowers(username,borrowed_count):
     global myconn
     mycurs = myconn.cursor(buffered=True)
     res = mycurs.execute(f"update BookStars set borrowed_count={borrowed_count} where username='{username}' and staff=0")
     return True
 
+@eel.expose
 def deleteBorrowers(username):
     global myconn
     mycurs = myconn.cursor(buffered=True)
@@ -228,5 +230,5 @@ def deleteBook(bookid):
 eel.init("gui")
 print("Hhel")
 myconn = dbConnect("localhost","root","root")
-
-eel.start("index.html")
+if myconn != None:
+    eel.start("index.html")

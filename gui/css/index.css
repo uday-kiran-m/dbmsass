@@ -124,7 +124,12 @@ nav ul li a {
     padding-bottom: 20px; /* For some space below the cards */
     align-items: center;
 }
-
+.library-grid::-webkit-scrollbar {
+    display: none;
+  }
+  a, u {
+    text-decoration: none;
+  }
 .card {
     background-color: #1c1c1c;
     border-radius: 10px;
