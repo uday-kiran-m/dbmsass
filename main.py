@@ -11,7 +11,7 @@ def db_init(dbIP,user,passwd):
     ## BookShelf(bookid INT,bookname varchar(50),bookauthor varchar(50),stock INT)
     ## BookStash(username foreign key bookstars , bookid foreign key bookshelf, fromdate, todate)
     ##
-    myconn = mc.connect(host=dbIP,user=user,passwd=passwd)
+    myconn = mc.connect(host=dbIP,user=user,passwd=passwd,auth_plugin='mysql_native_password')
     mycurs = myconn.cursor(buffered=True)
     mycurs.execute("""
                    CREATE DATABASE IF NOT EXISTS BookHub;
@@ -109,14 +109,15 @@ def insert_demo_data(myconn):
     # Close connection
     cursor.close()
     myconn.close()
-    quit()
+    #quit()
 
 def dbConnect(dbIP,user,passwd):
     try:
-        myconn = mc.connect(host=dbIP,user=user,passwd=passwd,database="BookHub")
+        myconn = mc.connect(host=dbIP,user=user,passwd=passwd,database="BookHub",auth_plugin='mysql_native_password')
+        print("--")
         return myconn
     except mc.Error as E:
-        # print("cannot connect to Database",E)
+        print("cannot connect to Database",E)
         if E.errno == 2003:
             print("Error: cannot reach server, check address and try again.")
         elif E.errno == 1049:
@@ -225,8 +226,7 @@ def deleteBook(bookid):
 
 
 eel.init("gui")
-
+print("Hhel")
 myconn = dbConnect("localhost","root","root")
-
 
 eel.start("index.html")
