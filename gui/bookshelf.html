@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BookShelf</title>
-    <link rel="stylesheet" href="css/bookshelf.css">
+    <link rel="stylesheet" href="bookshelf.css">
     <script type="text/javascript" src="/eel.js"></script>
 </head>
 <body>
@@ -24,6 +24,14 @@
             </nav>
         </div>
     </header>
+
+    <!-- Book List Section -->
+    <section class="book-list">
+        <div class="container">
+            <h2>Available Books</h2>
+            <div id="book-items-container" class="library-grid"></div>
+        </div>
+    </section>
 
     <!-- Add Book Section -->
     <section class="add-book">
@@ -47,21 +55,11 @@
         </div>
     </section>
 
-    <!-- Book List Section -->
-    <section class="book-list">
-        <div class="container">
-            <h2>Available Books</h2>
-            <!-- Library Grid for Horizontal Layout -->
-            <div id="book-items-container" class="library-grid"></div>
-        </div>
-    </section>
-
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const addBookForm = document.getElementById('add-book-form');
             const bookItemsContainer = document.getElementById('book-items-container');
 
-            // Existing book data
             const books = [
                 { number: '1', image: 'https://via.placeholder.com/200x300', name: 'Book Title 1', author: 'Author Name' },
                 { number: '2', image: 'https://via.placeholder.com/200x300', name: 'Book Title 2', author: 'Author Name' },
@@ -69,7 +67,6 @@
                 { number: '4', image: 'https://via.placeholder.com/200x300', name: 'Book Title 4', author: 'Author Name' },
             ];
 
-            // Function to render the book list
             function renderBooks() {
                 bookItemsContainer.innerHTML = '';
                 books.forEach((book, index) => {
@@ -88,7 +85,6 @@
                     bookItemsContainer.appendChild(bookItem);
                 });
 
-                // Attach edit event listeners
                 const editButtons = document.querySelectorAll('.edit-btn');
                 editButtons.forEach(button => {
                     button.addEventListener('click', function() {
@@ -103,7 +99,6 @@
                 });
             }
 
-            // Handle the form submission to add a new book or edit an existing one
             addBookForm.addEventListener('submit', function(event) {
                 event.preventDefault();
 
@@ -115,12 +110,10 @@
                 const newBook = { number: bookNumber, image: bookImage, name: bookName, author: bookAuthor };
 
                 if (addBookForm.dataset.editIndex !== undefined) {
-                    // Edit existing book
                     const editIndex = addBookForm.dataset.editIndex;
                     books[editIndex] = newBook;
                     delete addBookForm.dataset.editIndex;
                 } else {
-                    // Add new book
                     books.push(newBook);
                 }
 
@@ -128,7 +121,6 @@
                 renderBooks();
             });
 
-            // Initial render of books
             renderBooks();
         });
     </script>
