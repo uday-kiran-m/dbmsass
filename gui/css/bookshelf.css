@@ -1,15 +1,18 @@
+/* General reset for margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and overall layout */
 body {
     font-family: Arial, sans-serif;
     background-color: #121212;
     color: #fff;
-    margin: 0;
-    padding: 0;
 }
 
-a, u {
-    text-decoration: none;
-}
-
+/* Header */
 header {
     background-color: #000;
     padding: 20px 0;
@@ -24,14 +27,14 @@ header {
 }
 
 .logo h1 {
-    color: #FF9C00;
     font-size: 30px;
+    color: #FF9C00;
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: 30px;
 }
 
 nav ul li a {
@@ -41,9 +44,11 @@ nav ul li a {
     text-transform: uppercase;
 }
 
+/* Add Book Section */
 .add-book {
     padding: 30px 0;
     background-color: #1c1c1c;
+    text-align: center;
 }
 
 .add-book h2 {
@@ -51,108 +56,128 @@ nav ul li a {
     margin-bottom: 20px;
 }
 
-form {
-    background-color: #1c1c1c;
-    padding: 20px;
-    border-radius: 5px;
-    display: grid;
+.add-book form {
+    display: flex;
+    flex-direction: column;
     gap: 15px;
+    align-items: center;
 }
 
-label {
-    color: #fff;
-    font-weight: bold;
-}
-
-input[type="text"], input[type="url"] {
+.add-book input, .add-book button {
+    width: 80%;
     padding: 10px;
-    border: 1px solid #444;
-    background-color: #333;
-    color: #fff;
-    border-radius: 5px;
     font-size: 16px;
-}
-
-button[type="submit"] {
-    background-color: #FF9C00;
-    color: #121212;
     border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
     border: none;
 }
 
-.book-list {
-    padding: 30px 0;
+.add-book input {
+    background-color: #333;
+    color: #fff;
 }
 
+.add-book button {
+    background-color: #FF9C00;
+    color: #121212;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.add-book button:hover {
+    background-color: #e88500;
+}
+
+/* Book List Section */
+.book-list {
+    padding: 30px 0;
+    background-color: #121212;
+}
+
+.book-list h2 {
+    color: #FF9C00;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Horizontal layout for books */
 .library-grid {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
     gap: 20px;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    padding: 0 10px;
+    scroll-behavior: smooth;
 }
 
 .book-item {
     background-color: #1c1c1c;
-    padding: 20px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 220px;
+    border-radius: 10px;
+    padding: 15px;
     text-align: center;
+    flex-shrink: 0; /* Prevent shrinking */
+    width: 200px; /* Fixed width for consistent layout */
+    transition: transform 0.2s ease;
 }
 
-.book-item h3 {
-    color: #FF9C00;
-    margin: 10px 0;
-}
-
-.book-item p {
-    margin: 5px 0;
+.book-item:hover {
+    transform: scale(1.05);
 }
 
 .book-item img {
     width: 100%;
-    height: 300px;
+    height: 250px;
     object-fit: cover;
     border-radius: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+}
+
+.book-item h3 {
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.book-item p {
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 10px;
 }
 
 .button-container {
     display: flex;
+    justify-content: center;
     gap: 10px;
 }
 
-button {
+.borrow-btn, .edit-btn {
     background-color: #FF9C00;
     border: none;
-    padding: 10px 20px;
+    padding: 8px 15px;
     color: #121212;
+    font-size: 14px;
+    font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #FF7F00;
+.borrow-btn:hover, .edit-btn:hover {
+    background-color: #e88500;
 }
 
-body::-webkit-scrollbar {
-    display: none;
-}
-
-/* Responsive adjustments */
+/* Responsive Design */
 @media (max-width: 768px) {
-    .book-item {
-        width: 100%;
+    .add-book input, .add-book button {
+        width: 95%;
     }
 
-    .button-container {
-        flex-direction: column;
-        gap: 5px;
+    .library-grid {
+        gap: 10px;
+    }
+
+    .book-item {
+        width: 150px;
+    }
+
+    .book-item img {
+        height: 200px;
     }
 }

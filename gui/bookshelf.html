@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book</title>
+    <title>BookShelf</title>
     <link rel="stylesheet" href="bookshelf.css">
     <script type="text/javascript" src="/eel.js"></script>
 </head>
 <body>
+    <!-- Header Section -->
     <header>
         <div class="container">
             <div class="logo">
@@ -24,6 +25,7 @@
         </div>
     </header>
 
+    <!-- Add Book Section -->
     <section class="add-book">
         <div class="container">
             <h2>Add New Book</h2>
@@ -45,9 +47,11 @@
         </div>
     </section>
 
+    <!-- Book List Section -->
     <section class="book-list">
         <div class="container">
             <h2>Available Books</h2>
+            <!-- Library Grid for Horizontal Layout -->
             <div id="book-items-container" class="library-grid"></div>
         </div>
     </section>
