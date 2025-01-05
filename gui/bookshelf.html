@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookHub - BookShelf</title>
-    <link rel="stylesheet" href="css/bookshelf.css">
+    <title>BookShelf</title>
+    <link rel="stylesheet" href="bookshelf.css">
     <script type="text/javascript" src="/eel.js"></script>
 </head>
 <body>
+    <!-- Header Section -->
     <header>
         <div class="container">
             <div class="logo">
@@ -15,15 +16,16 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="page3.html">BookStars</a></li>
-                    <li><a href="page1.html">Books</a></li>
-                    <li><a href="page2.html">Borrows</a></li>
+                    <li><a href="bookstars.html">BookStars</a></li>
+                    <li><a href="bookshelf.html">BookShelf</a></li>
+                    <li><a href="borrow.html">Borrows</a></li>
                     <li><a href="page5.html">Account</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
+    <!-- Add Book Section -->
     <section class="add-book">
         <div class="container">
             <h2>Add New Book</h2>
@@ -45,10 +47,12 @@
         </div>
     </section>
 
+    <!-- Book List Section -->
     <section class="book-list">
         <div class="container">
             <h2>Available Books</h2>
-            <div id="book-items-container"></div>
+            <!-- Library Grid for Horizontal Layout -->
+            <div id="book-items-container" class="library-grid"></div>
         </div>
     </section>
 
@@ -59,10 +63,10 @@
 
             // Existing book data
             const books = [
-                { number: '1', image: 'https://via.placeholder.com/100', name: 'Book Title 1', author: 'Author Name' },
-                { number: '2', image: 'https://via.placeholder.com/100', name: 'Book Title 2', author: 'Author Name' },
-                { number: '3', image: 'https://via.placeholder.com/100', name: 'Book Title 3', author: 'Author Name' },
-                { number: '4', image: 'https://via.placeholder.com/100', name: 'Book Title 4', author: 'Author Name' },
+                { number: '1', image: 'https://via.placeholder.com/200x300', name: 'Book Title 1', author: 'Author Name' },
+                { number: '2', image: 'https://via.placeholder.com/200x300', name: 'Book Title 2', author: 'Author Name' },
+                { number: '3', image: 'https://via.placeholder.com/200x300', name: 'Book Title 3', author: 'Author Name' },
+                { number: '4', image: 'https://via.placeholder.com/200x300', name: 'Book Title 4', author: 'Author Name' },
             ];
 
             // Function to render the book list
@@ -76,8 +80,10 @@
                         <h3>${book.name}</h3>
                         <p>Author: ${book.author}</p>
                         <p>Book No: ${book.number}</p>
-                        <button class="borrow-btn">Borrow</button>
-                        <button class="edit-btn" data-index="${index}">Book Edit</button>
+                        <div class="button-container">
+                            <button class="borrow-btn">Borrow</button>
+                            <button class="edit-btn" data-index="${index}">Book Edit</button>
+                        </div>
                     `;
                     bookItemsContainer.appendChild(bookItem);
                 });
