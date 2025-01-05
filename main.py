@@ -235,4 +235,4 @@ def deleteBook(bookid):
 
 eel.init("gui")
 #myconn = dbConnect("localhost","root","root")
-eel.start("login.html")
+eel.start("index.html")
