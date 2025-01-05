@@ -24,11 +24,11 @@
 
     <section class="borrowers-section">
         <div class="container">
-            <h2>Borrowers List</h2>
+            <h2>bookstars List</h2>
             <table class="borrowers-table">
                 <thead>
                     <tr>
-                        <th>Borrower ID</th>
+                        <th>Borrowers</th>
                         <th>Name</th>
                         <th>Book Borrowed</th>
                         <th>Actions</th>
@@ -62,6 +62,7 @@
                 <form id="addBorrowerForm" onsubmit="addBorrower(event)">
                     <input type="text" id="borrowerName" placeholder="Borrower Name" required>
                     <input type="text" id="bookBorrowed" placeholder="Book Borrowed" required>
+                    <input type="date" id="bookBorrowed" placeholder="Borrowed date " required>
                     <button type="submit">Add Borrower</button>
                 </form>
             </div>
