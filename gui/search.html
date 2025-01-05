@@ -29,6 +29,14 @@
     </section>
 
     <script>
+        window.onload = function () {
+            const loggedIn = localStorage.getItem('loggedIn');
+            const username = localStorage.getItem('username');
+    
+            if (loggedIn !== 'true' || !username) {
+                window.location.href = 'login.html';
+            }
+        };
         let books = [];
         eel.listBooks()().then(function(b) {books = b;})
 

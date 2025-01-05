@@ -132,10 +132,12 @@ def dbConnect(dbIP,user,passwd):
 def loginStaff(username,password):
     global myconn
     mycurs = myconn.cursor(buffered=True)
-    res = mycurs.execute(f"select * from BookStars where username='{username}' and password='{password}' and staff=1")
+    mycurs.execute(f"select * from BookStars where username='{username}' and password='{password}' and staff=1")
+    res = mycurs.fetchall()
     if len(res) == 0:
         return False
     else:
+        mycurs.execute(f"update BookStars set Logged_in=1 where username='{username}'")
         # set logged in status 1
         return True
     
@@ -143,7 +145,7 @@ def loginStaff(username,password):
 def logoutStaff(username):
     global myconn
     mycurs = myconn.cursor(buffered=True)
-    res = mycurs.execute(f"update BookStars set Logged_in=0 where username='{username}'")
+    mycurs.execute(f"update BookStars set Logged_in=0 where username='{username}'")
     return True
 
 @eel.expose

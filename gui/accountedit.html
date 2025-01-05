@@ -15,7 +15,7 @@
     <header>
         <div class="container">
             <div class="logo">
-                <h1><a href="index.html" style="text-decoration: none; color: #FF9C00;">LibraryHub</a></h1>
+                <h1><a href="index.html" style="text-decoration: none; color: #FF9C00;">BookHub</a></h1>
             </div>
         </div>
     </header>
@@ -33,11 +33,19 @@
             <p id="updatedName"></p>
             <p id="updatedEmail"></p>
             <p id="updatedPhone"></p>
-            <a href="page5.html"><button>Back to Account</button></a>
+            <a href="account.html"><button>Back to Account</button></a>
         </div>
     </section>
 
     <script>
+        window.onload = function () {
+            const loggedIn = localStorage.getItem('loggedIn');
+            const username = localStorage.getItem('username');
+    
+            if (loggedIn !== 'true' || !username) {
+                window.location.href = 'login.html';
+            }
+        };
         const editForm = document.getElementById('editForm');
         const userDetails = document.getElementById('userDetails');
         const updatedName = document.getElementById('updatedName');

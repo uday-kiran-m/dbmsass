@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookHub - Login</title>
+    <title>BookHub - Account</title>
     <link rel="stylesheet" href="css/login.css">
     <script type="text/javascript" src="/eel.js"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
@@ -19,28 +19,20 @@
                 <a href="index.html"><h1>BookHub</h1></a>
             </div>
             <nav>
-                <!-- <ul>
+                <ul>
                     <li><a href="bookstars.html">BookStars</a></li>
                     <li><a href="bookshelf.html">Books</a></li>
                     <li><a href="borrow.html">Borrows</a></li>
-                    <li id="accountMenu"><a href="page5.html">Account</a></li>
-                </ul> -->
+                    <li id="accountMenu"><a href="account.html">Account</a></li>
+                </ul>
             </nav>
         </div>
     </header>
 
     <!-- Login Section -->
     <section class="login-section">
-        <div id="loginContainer">
-            <h2>Login to Your Account</h2>
-            <form action="#" method="POST" id="loginForm">
-                <input type="text" id="username" name="username" placeholder="Username" required>
-                <input type="password" id="password" name="password" placeholder="Password" required>
-                <button type="submit">Login</button>
-            </form>
-        </div>
 
-        <div id="userDetails" style="display: none;">
+        <div id="userDetails" style="display: flex;">
             <h2>Welcome, <span id="userDisplayName"></span>!</h2>
             <div class="user-actions">
                 <button id="editDetailsButton">Edit Details</button>
@@ -50,9 +42,7 @@
     </section>
 
     <script>
-        const loginForm = document.getElementById('loginForm');
         const loginContainer = document.getElementById('loginContainer');
-        const userDetails = document.getElementById('userDetails');
         const userDisplayName = document.getElementById('userDisplayName');
         const logoutButton = document.getElementById('logoutButton');
         const editDetailsButton = document.getElementById('editDetailsButton');
@@ -63,25 +53,13 @@
             const loggedIn = localStorage.getItem('loggedIn');
             const username = localStorage.getItem('username');
 
-            if (loggedIn === 'true' && username) {
-                window.location.href = 'index.html';
+            if (loggedIn !== 'true' && !username) {
+                window.location.href = 'login.html';
             }
         };
+        const username = localStorage.getItem('username');
+        userDisplayName.textContent = username;
 
-        // Login form submission
-        loginForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const username = document.getElementById('username').value;
-            const passwd = document.getElementById('password').value;
-            eel.loginStaff(username,passwd)().then(function(status){
-                if(status===true){
-            localStorage.setItem('loggedIn', 'true');
-            localStorage.setItem('username', username);
-            window.location.href = 'index.html';
-            //showUserDetails(username);
-                }
-            })
-        });
 
         // Logout button
         logoutButton.addEventListener('click', function () {
@@ -91,7 +69,7 @@
 
         // Edit Details button
         editDetailsButton.addEventListener('click', function () {
-            window.location.href = 'page6.html';
+            window.location.href = 'accountedit.html';
         });
 
         function showUserDetails(username) {
