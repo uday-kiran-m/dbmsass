@@ -236,6 +236,5 @@ def deleteBook(bookid):
 
 
 eel.init("gui")
-myconn = dbConnect("localhost","root","root")
-if myconn != None:
-    eel.start("login.html")
+#myconn = dbConnect("localhost","root","root")
+eel.start("index.html")
