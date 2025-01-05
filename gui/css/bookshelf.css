@@ -1,14 +1,23 @@
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #f8f9fa; /* Light background color */
+    color: #212529; /* Dark text color */
 }
 
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
+    background-color: #343a40; /* Dark header background */
+    color: #fff; /* White text */
+    padding: 15px 0;
 }
 
 header .container {
@@ -18,8 +27,10 @@ header .container {
 }
 
 header .logo h1 {
+    font-size: 28px;
     margin: 0;
-    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 header nav ul {
@@ -27,28 +38,31 @@ header nav ul {
     margin: 0;
     padding: 0;
     display: flex;
-}
-
-header nav ul li {
-    margin: 0 15px;
+    gap: 20px;
 }
 
 header nav ul li a {
     color: #fff;
     text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 0 15px;
+header nav ul li a:hover {
+    color: #ffc107; /* Highlight color on hover */
 }
 
+/* Section Titles */
 h2 {
+    font-size: 24px;
     text-align: center;
-    color: #333;
+    color: #343a40;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
+/* Book List Section */
 .library-grid {
     display: flex;
     flex-wrap: wrap;
@@ -57,28 +71,38 @@ h2 {
 }
 
 .book-item {
-    background-color: #fff;
-    border: 1px solid #ddd;
+    background-color: #fff; /* White card background */
+    border: 1px solid #dee2e6; /* Light border */
     border-radius: 8px;
     padding: 15px;
-    text-align: center;
     width: 200px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.book-item:hover {
+    transform: translateY(-5px); /* Lift effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Deeper shadow */
 }
 
 .book-item img {
     width: 100%;
     height: auto;
     border-radius: 4px;
+    margin-bottom: 10px;
 }
 
 .book-item h3 {
     font-size: 18px;
     margin: 10px 0;
+    color: #495057; /* Dark gray text */
 }
 
 .book-item p {
     font-size: 14px;
-    color: #555;
+    color: #6c757d; /* Lighter gray text */
+    margin: 5px 0;
 }
 
 .button-container {
@@ -86,30 +110,36 @@ h2 {
 }
 
 button {
-    background-color: #333;
-    color: #fff;
+    background-color: #343a40; /* Dark button background */
+    color: #fff; /* White text */
     border: none;
     padding: 8px 12px;
     cursor: pointer;
     border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
     margin: 5px;
 }
 
 button:hover {
-    background-color: #555;
+    background-color: #ffc107; /* Highlight button color on hover */
+    color: #343a40; /* Dark text on hover */
 }
 
+/* Add Book Section */
 .add-book form {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #dee2e6;
 }
 
 .add-book form label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: #495057; /* Dark gray label text */
 }
 
 .add-book form input,
@@ -117,6 +147,47 @@ button:hover {
     width: 100%;
     margin-bottom: 15px;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #ced4da; /* Light border */
     border-radius: 4px;
+    font-size: 14px;
+}
+
+.add-book form input:focus {
+    border-color: #ffc107; /* Highlight border on focus */
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+}
+
+.add-book form button {
+    background-color: #343a40; /* Dark button background */
+    color: #fff; /* White text */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-book form button:hover {
+    background-color: #ffc107; /* Highlight button color on hover */
+    color: #343a40; /* Dark text on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .library-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .book-item {
+        width: 90%;
+    }
+
+    header .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
