@@ -19,6 +19,7 @@
             </div>
             <nav>
                 <ul>
+                    <li><a href="bookstars.html">BookStars</a></li>
                     <li><a href="bookshelf.html">BookShelf</a></li>
                     <li><a href="borrow.html">Borrows</a></li>
                     <li><a href="page5.html">Account</a></li>
@@ -29,11 +30,11 @@
 
     <section class="borrowers-section">
         <div class="container">
-            <h2>Borrowers List</h2>
+            <h2> BOOKSTARS LIST</h2>
             <table class="borrowers-table">
                 <thead>
                     <tr>
-                        <th>Borrower ID</th>
+                        <th>Borrowers</th>
                         <th>Name</th>
                         <th>Book Borrowed</th>
                         <th>Actions</th>
@@ -66,7 +67,8 @@
                 <h3>Add Borrower</h3>
                 <form id="addBorrowerForm" onsubmit="addBorrower(event)">
                     <input type="text" id="borrowerName" placeholder="Borrower Name" required>
-                    <input type="text" id="bookBorrowed" placeholder="Borrower Password" required>
+                    <input type="text" id="bookBorrowed" placeholder="Book Borrowed" required>
+                    <input type="date" id="bookBorrowed" placeholder="Borrowed date " required>
                     <button type="submit">Add Borrower</button>
                 </form>
             </div>
