@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BookHub - Login</title>
-    <link rel="stylesheet" href="css/page5.css">
+    <link rel="stylesheet" href="css/login.css">
     <script type="text/javascript" src="/eel.js"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
@@ -19,12 +19,12 @@
                 <a href="index.html"><h1>BookHub</h1></a>
             </div>
             <nav>
-                <ul>
+                <!-- <ul>
                     <li><a href="bookstars.html">BookStars</a></li>
                     <li><a href="bookshelf.html">Books</a></li>
                     <li><a href="borrow.html">Borrows</a></li>
                     <li id="accountMenu"><a href="page5.html">Account</a></li>
-                </ul>
+                </ul> -->
             </nav>
         </div>
     </header>
@@ -44,7 +44,7 @@
             <h2>Welcome, <span id="userDisplayName"></span>!</h2>
             <div class="user-actions">
                 <button id="editDetailsButton">Edit Details</button>
-                <button id="logoutButton"><a href="page5.html">Logout</a></button>
+                <button id="logoutButton"><a href="login.html">Logout</a></button>
             </div>
         </div>
     </section>
@@ -92,7 +92,7 @@
             loginContainer.style.display = 'none';
             userDetails.style.display = 'flex';
             userDisplayName.textContent = username;
-            accountMenu.innerHTML = '<a href="page5.html">Logout</a>';
+            accountMenu.innerHTML = '<a href="login.html">Logout</a>';
         }
 
         function showLoginForm() {
