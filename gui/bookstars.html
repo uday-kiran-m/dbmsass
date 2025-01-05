@@ -4,74 +4,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BookStars</title>
-    <link rel="stylesheet" href="css/bookstars.css">
-    <script type="text/javascript" src="/eel.js"></script>
+    <link rel="stylesheet" href="page3.css">
 </head>
 <body>
     <header>
         <div class="container">
             <div class="logo">
-                <a href="index.html"><h1>BookHub</h1></a>
+                <h1><a href="index.html">BookHub</a></h1>
             </div>
             <nav>
                 <ul>
-                    <li><a href="bookstars.html">BookStars</a></li>
-                    <li><a href="bookshelf.html">Bookshelf</a></li>
+                    <li><a href="bookshelf.html">BookShelf</a></li>
                     <li><a href="borrow.html">Borrows</a></li>
-                    <li><a href="#">Account</a></li>
+                    <li><a href="page5.html">Account</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section class="bookstars">
+    <section class="borrowers-section">
         <div class="container">
-            <h2>BookStars</h2>
-            <div class="search-bar-container">
-                <input type="text" id="search-bar" placeholder="Search for Borrowers..." onkeyup="showSuggestions(this.value)">
-                <ul id="suggestions" class="suggestions-list"></ul>
-            </div>
-            <script>
-                const borrowers = [
-                    "John Doe",
-                    "Jane Smith",
-                    "Michael Brown",
-                    "Sarah Johnson",
-                    "Emily Davis"
-                ];
-            
-                function showSuggestions(query) {
-                    const suggestions = document.getElementById('suggestions');
-                    suggestions.innerHTML = '';
-                    if (query.length > 0) {
-                        const matches = borrowers.filter(borrower => borrower.toLowerCase().includes(query.toLowerCase()));
-                        matches.forEach(match => {
-                            const li = document.createElement('li');
-                            li.textContent = match;
-                            li.onclick = () => {
-                                document.getElementById('search-bar').value = match;
-                                suggestions.innerHTML = '';
-                            };
-                            suggestions.appendChild(li);
-                        });
-                    }
-                }
-            </script>
-            <div class="add-borrow">
-                <h3>Add New Borrow</h3>
-                <form>
-                    <input type="text" placeholder="Borrower Name" required>
-                    <input type="text" placeholder="Book Title" required>
-                    <input type="date" placeholder="Date Borrowed" required>
-                    <input type="date" placeholder="Return Date" required>
-                    <button type="submit">Add Borrow</button>
+            <h2>Borrowers List</h2>
+            <table class="borrowers-table">
+                <thead>
+                    <tr>
+                        <th>Borrower ID</th>
+                        <th>Name</th>
+                        <th>Book Borrowed</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="borrowersTableBody">
+                    <!-- Sample Data -->
+                    <tr>
+                        <td>1</td>
+                        <td>John Doe</td>
+                        <td>JavaScript Essentials</td>
+                        <td>
+                            <button class="edit-btn" onclick="editBorrower(this)">Edit</button>
+                            <button class="delete-btn" onclick="deleteBorrower(this)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Jane Smith</td>
+                        <td>Python for Beginners</td>
+                        <td>
+                            <button class="edit-btn" onclick="editBorrower(this)">Edit</button>
+                            <button class="delete-btn" onclick="deleteBorrower(this)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="add-borrower-form">
+                <h3>Add Borrower</h3>
+                <form id="addBorrowerForm" onsubmit="addBorrower(event)">
+                    <input type="text" id="borrowerName" placeholder="Borrower Name" required>
+                    <input type="text" id="bookBorrowed" placeholder="Book Borrowed" required>
+                    <button type="submit">Add Borrower</button>
                 </form>
             </div>
         </div>
     </section>
 
+    <script>
+        function deleteBorrower(button) {
+            const row = button.parentElement.parentElement;
+            row.remove();
+        }
 
+        function editBorrower(button) {
+            const row = button.parentElement.parentElement;
+            const nameCell = row.children[1];
+            const bookCell = row.children[2];
 
+            const newName = prompt("Edit Borrower Name:", nameCell.textContent);
+            const newBook = prompt("Edit Book Borrowed:", bookCell.textContent);
 
+            if (newName) nameCell.textContent = newName;
+            if (newBook) bookCell.textContent = newBook;
+        }
+
+        function addBorrower(event) {
+            event.preventDefault();
+
+            const borrowerName = document.getElementById("borrowerName").value;
+            const bookBorrowed = document.getElementById("bookBorrowed").value;
+
+            const tableBody = document.getElementById("borrowersTableBody");
+            const newRow = document.createElement("tr");
+
+            newRow.innerHTML = `
+                <td>${tableBody.children.length + 1}</td>
+                <td>${borrowerName}</td>
+                <td>${bookBorrowed}</td>
+                <td>
+                    <button class="edit-btn" onclick="editBorrower(this)">Edit</button>
+                    <button class="delete-btn" onclick="deleteBorrower(this)">Delete</button>
+                </td>
+            `;
+
+            tableBody.appendChild(newRow);
+
+            document.getElementById("addBorrowerForm").reset();
+        }
+    </script>
 </body>
 </html>
