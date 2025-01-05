@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS BookHub.BookStash (
     bookid INT,
     fromdate DATE NOT NULL, -- Starting date of the book borrowing
     todate DATE NOT NULL,   -- Ending date of the book borrowing
+    returned TINYINT(1) DEFAULT 0,
     PRIMARY KEY (username, bookid, fromdate), -- Composite primary key to ensure uniqueness
     FOREIGN KEY (username) REFERENCES BookStars(username) ON DELETE CASCADE, -- Foreign key from BookStars
     FOREIGN KEY (bookid) REFERENCES BookShelf(bookid) ON DELETE CASCADE -- Foreign key from BookShelf
@@ -200,12 +201,14 @@ def deleteStaff(username):
     res = mycurs.execute(f"delete from BookStars where username='{username}' and staff=1")
     return True
 
+@eel.expose
 def createBook(bookName,bookAuthor,stock):
     global myconn
     mycurs = myconn.cursor(buffered=True)
     res = mycurs.execute(f"insert into BookShelf value ('{bookName}','{bookAuthor}',{stock})")
     return True
 
+@eel.expose
 def updateBook(bookid,bookName=None,bookAuthor=None,stock=None):
     global myconn
     mycurs = myconn.cursor(buffered=True)
@@ -220,11 +223,14 @@ def listBooks(bookName=None,bookAuthor=None):
     res = mycurs.fetchall()
     return res
 
+@eel.expose
 def deleteBook(bookid):
     global myconn
     mycurs = myconn.cursor(buffered=True)
     res = mycurs.execute(f"delete from BookShelf where bookid={bookid})")
     return True
+
+
 
 
 eel.init("gui")
