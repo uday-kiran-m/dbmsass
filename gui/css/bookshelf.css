@@ -70,22 +70,84 @@ body::-webkit-scrollbar {
 }
 
 button {
-    background-color: #FF9C00;
+    background-color: #343a40; /* Dark button background */
+    color: #fff; /* White text */
     border: none;
-    padding: 10px 20px;
-    color: #121212;
-    border-radius: 5px;
-    margin-right: 10px;
+    padding: 8px 12px;
     cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    margin: 5px;
 }
-.library-grid {
-    display: flex;
-    gap: 20px;
-    padding-bottom: 20px; /* For some space below the cards */
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 15px;
+
+button:hover {
+    background-color: #ffc107; /* Highlight button color on hover */
+    color: #343a40; /* Dark text on hover */
 }
-h2 {
-    margin: 15px;
+
+/* Add Book Section */
+.add-book form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #dee2e6;
+}
+
+.add-book form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #495057; /* Dark gray label text */
+}
+
+.add-book form input,
+.add-book form button {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ced4da; /* Light border */
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.add-book form input:focus {
+    border-color: #ffc107; /* Highlight border on focus */
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+}
+
+.add-book form button {
+    background-color: #343a40; /* Dark button background */
+    color: #fff; /* White text */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-book form button:hover {
+    background-color: #ffc107; /* Highlight button color on hover */
+    color: #343a40; /* Dark text on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .library-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .book-item {
+        width: 90%;
+    }
+
+    header .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
