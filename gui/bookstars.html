@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,11 @@
     <link rel="stylesheet" href="css/bookstars.css">
     <script type="text/javascript" src="/eel.js"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -67,8 +69,7 @@
                 <h3>Add Borrower</h3>
                 <form id="addBorrowerForm" onsubmit="addBorrower(event)">
                     <input type="text" id="borrowerName" placeholder="Borrower Name" required>
-                    <input type="text" id="bookBorrowed" placeholder="Book Borrowed" required>
-                    <input type="date" id="bookBorrowed" placeholder="Borrowed date " required>
+                    <input type="password" id="borrowerPass" placeholder="Borrower Password" required>
                     <button type="submit">Add Borrower</button>
                 </form>
             </div>
@@ -79,51 +80,82 @@
         window.onload = function () {
             const loggedIn = localStorage.getItem('loggedIn');
             const username = localStorage.getItem('username');
-    
+
             if (loggedIn !== 'true' || !username) {
                 window.location.href = 'login.html';
             }
+            listBorrowers();
         };
+        function listBorrowers() {
+
+            const tableBody = document.getElementById("borrowersTableBody");
+            var new_tbody = document.createElement('tbody');
+            new_tbody.setAttribute("id", "borrowersTableBody");
+            tableBody.parentNode.replaceChild(new_tbody, tableBody)
+
+            eel.listBorrowers()().then(function (borrowers) {
+
+                borrowers.forEach((borrower, index) => {
+                    const newRow = document.createElement("tr");
+                    newRow.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${borrower[0]}</td>
+                    <td>${borrower[3]}</td>
+                    <td>
+                        <button class="edit-btn" onclick="editBorrower(this)">Edit</button>
+                        <button class="delete-btn" onclick="deleteBorrower(this)">Delete</button>
+                    </td>`
+                    console.log(borrower)
+                    new_tbody.appendChild(newRow);
+                })
+            });
+
+        }
         function deleteBorrower(button) {
             const row = button.parentElement.parentElement;
-            row.remove();
+            const name = row.children[1].textContent;
+            eel.deleteBorrowers(name)
+            listBorrowers();
         }
 
         function editBorrower(button) {
             const row = button.parentElement.parentElement;
             const nameCell = row.children[1];
             const bookCell = row.children[2];
-
-            const newName = prompt("Edit Borrower Name:", nameCell.textContent);
-            const newBook = prompt("Edit Book Borrowed:", bookCell.textContent);
-
-            if (newName) nameCell.textContent = newName;
-            if (newBook) bookCell.textContent = newBook;
+            const newBook = prompt("Edit Book Count:", bookCell.textContent);
+            console.log(nameCell.textContent+"---"+newBook)
+            eel.updateBorrowers(nameCell.textContent,newBook)
+            listBorrowers()
         }
 
         function addBorrower(event) {
             event.preventDefault();
-
             const borrowerName = document.getElementById("borrowerName").value;
-            const bookBorrowed = document.getElementById("bookBorrowed").value;
-
-            const tableBody = document.getElementById("borrowersTableBody");
-            const newRow = document.createElement("tr");
-
-            newRow.innerHTML = `
-                <td>${tableBody.children.length + 1}</td>
-                <td>${borrowerName}</td>
-                <td>${bookBorrowed}</td>
-                <td>
-                    <button class="edit-btn" onclick="editBorrower(this)">Edit</button>
-                    <button class="delete-btn" onclick="deleteBorrower(this)">Delete</button>
-                </td>
-            `;
-
-            tableBody.appendChild(newRow);
-
-            document.getElementById("addBorrowerForm").reset();
+            const borrowerPasswd = document.getElementById("borrowerPass").value;
+            done = eel.createBorrower(borrowerName, borrowerPasswd)()
+            if (done) {
+                const tableBody = document.getElementById("borrowersTableBody");
+                var new_tbody = document.createElement('tbody');
+                new_tbody.setAttribute("id", "borrowersTableBody");
+                tableBody.parentNode.replaceChild(new_tbody, tableBody)
+                eel.listBorrowers()().then(function (borrowers) {
+                    borrowers.forEach((borrower, index) => {
+                        const newRow = document.createElement("tr");
+                        newRow.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${borrower[0]}</td>
+                        <td>${borrower[3]}</td>
+                        <td>
+                            <button class="edit-btn" onclick="editBorrower(this)">Edit</button>
+                            <button class="delete-btn" onclick="deleteBorrower(this)">Delete</button>
+                        </td>`
+                        new_tbody.appendChild(newRow);
+                    })
+                })
+                document.getElementById("addBorrowerForm").reset();
+            }
         }
     </script>
 </body>
+
 </html>

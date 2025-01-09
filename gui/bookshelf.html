@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookShelf</title>
-    <link rel="stylesheet" href="bookshelf.css">
+    <title>BookHub - BookShelf</title>
+    <link rel="stylesheet" href="css/bookshelf.css">
     <script type="text/javascript" src="/eel.js"></script>
 </head>
+
 <body>
-    <!-- Header Section -->
     <header>
         <div class="container">
             <div class="logo">
-                <a href="index.html"><h1>BookHub</h1></a>
+                <a href="index.html">
+                    <h1>BookHub</h1>
+                </a>
             </div>
             <nav>
                 <ul>
                     <li><a href="bookstars.html">BookStars</a></li>
-                    <li><a href="bookshelf.html">BookShelf</a></li>
+                    <li><a href="bookshelf.html">Bookshelf</a></li>
                     <li><a href="borrow.html">Borrows</a></li>
                     <li><a href="account.html">Account</a></li>
                 </ul>
@@ -25,112 +28,57 @@
         </div>
     </header>
 
-    <!-- Book List Section -->
-    <section class="book-list">
-        <div class="container">
-            <h2>Available Books</h2>
-            <div id="book-items-container" class="library-grid"></div>
-        </div>
+    <!-- <section class="book-list"> -->
+        <h2>Available Books</h2>
+        <section class="library-grid" id="bookgrid">
     </section>
-
-    <!-- Add Book Section -->
-    <section class="add-book">
-        <div class="container">
-            <h2>Add New Book</h2>
-            <form id="add-book-form">
-                <label for="book-number">Book Number:</label>
-                <input type="text" id="book-number" name="book-number" required>
-                
-                <label for="book-image">Book Image URL:</label>
-                <input type="url" id="book-image" name="book-image" required>
-                
-                <label for="book-name">Book Name:</label>
-                <input type="text" id="book-name" name="book-name" required>
-                
-                <label for="book-author">Author Name:</label>
-                <input type="text" id="book-author" name="book-author" required>
-                
-                <button type="submit">Add Book</button>
-            </form>
-        </div>
-    </section>
-
     <script>
-        window.onload = function () {
-            const loggedIn = localStorage.getItem('loggedIn');
-            const username = localStorage.getItem('username');
-    
-            if (loggedIn !== 'true' || !username) {
-                window.location.href = 'login.html';
-            }
-        };
-        document.addEventListener("DOMContentLoaded", function() {
-            const addBookForm = document.getElementById('add-book-form');
-            const bookItemsContainer = document.getElementById('book-items-container');
+        function loadBooks(){
+            eel.listBooks()(renderBooksInContainers)
+        }
+        function renderBooksInContainers(books) {
+            let container = document.getElementById("bookgrid");
+            
+            books.forEach((book, index) => {
+                // Create a new container every 4 books
+                
+                // Book item
+                const bookItem = document.createElement('div');
+                bookItem.classList.add('book-item');
+                
+                // Book title
+                const title = document.createElement('h3');
+                title.textContent = book[1];
+                bookItem.appendChild(title);
 
-            const books = [
-                { number: '1', image: 'https://via.placeholder.com/200x300', name: 'Book Title 1', author: 'Author Name' },
-                { number: '2', image: 'https://via.placeholder.com/200x300', name: 'Book Title 2', author: 'Author Name' },
-                { number: '3', image: 'https://via.placeholder.com/200x300', name: 'Book Title 3', author: 'Author Name' },
-                { number: '4', image: 'https://via.placeholder.com/200x300', name: 'Book Title 4', author: 'Author Name' },
-            ];
-
-            function renderBooks() {
-                bookItemsContainer.innerHTML = '';
-                books.forEach((book, index) => {
-                    const bookItem = document.createElement('div');
-                    bookItem.classList.add('book-item');
-                    bookItem.innerHTML = `
-                        <img src="${book.image}" alt="${book.name}" class="book-image">
-                        <h3>${book.name}</h3>
-                        <p>Author: ${book.author}</p>
-                        <p>Book No: ${book.number}</p>
-                        <div class="button-container">
-                            <button class="borrow-btn">Borrow</button>
-                            <button class="edit-btn" data-index="${index}">Book Edit</button>
-                        </div>
-                    `;
-                    bookItemsContainer.appendChild(bookItem);
-                });
-
-                const editButtons = document.querySelectorAll('.edit-btn');
-                editButtons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        const index = button.getAttribute('data-index');
-                        const book = books[index];
-                        document.getElementById('book-number').value = book.number;
-                        document.getElementById('book-image').value = book.image;
-                        document.getElementById('book-name').value = book.name;
-                        document.getElementById('book-author').value = book.author;
-                        addBookForm.dataset.editIndex = index;
-                    });
-                });
-            }
-
-            addBookForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-
-                const bookNumber = document.getElementById('book-number').value;
-                const bookImage = document.getElementById('book-image').value;
-                const bookName = document.getElementById('book-name').value;
-                const bookAuthor = document.getElementById('book-author').value;
-
-                const newBook = { number: bookNumber, image: bookImage, name: bookName, author: bookAuthor };
-
-                if (addBookForm.dataset.editIndex !== undefined) {
-                    const editIndex = addBookForm.dataset.editIndex;
-                    books[editIndex] = newBook;
-                    delete addBookForm.dataset.editIndex;
-                } else {
-                    books.push(newBook);
-                }
-
-                addBookForm.reset();
-                renderBooks();
+                // Book image
+                const image = document.createElement('img');
+                image.src = "data:image/jpeg;base64,"+book[4];
+                image.alt = 'Content Thumbnail';
+                bookItem.appendChild(image);
+                
+                // Book author
+                const author = document.createElement('p');
+                author.textContent = `Author: ${book[2]}`;
+                bookItem.appendChild(author);
+                
+                // Borrow button
+                const borrowButton = document.createElement('button');
+                borrowButton.classList.add('borrow-btn');
+                borrowButton.textContent = 'Borrow';
+                bookItem.appendChild(borrowButton);
+                
+                // Edit button
+                const editButton = document.createElement('button');
+                editButton.classList.add('edit-btn');
+                editButton.textContent = 'Book Edit';
+                bookItem.appendChild(editButton);
+                
+                // Append book item to the current container
+                container.appendChild(bookItem);
             });
-
-            renderBooks();
-        });
+        }
+        loadBooks()
     </script>
 </body>
 </html>

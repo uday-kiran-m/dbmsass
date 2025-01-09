@@ -149,17 +149,18 @@ def logoutStaff(username):
     return True
 
 @eel.expose
-def createBorrower(username):
+def createBorrower(username,password):
     global myconn
     mycurs = myconn.cursor(buffered=True)
-    res = mycurs.execute(f"insert into BookStars value ('{username}',null,0,0,0)")
+    res = mycurs.execute(f"insert into BookStars value ('{username}','{password}',0,0,0)")
     return True
 
 @eel.expose
 def listBorrowers(username=None):
     global myconn
     mycurs = myconn.cursor(buffered=True)
-    res = mycurs.execute(f"select * from BookStars where staff=0 {f"and username like '%{username}%'" if username else ""}")
+    mycurs.execute(f"select * from BookStars where staff=0 {f"and username like '%{username}%'" if username else ""}")
+    res = mycurs.fetchall()
     return res
 
 @eel.expose
@@ -214,14 +215,16 @@ def createBook(bookName,bookAuthor,stock):
 def updateBook(bookid,bookName=None,bookAuthor=None,stock=None):
     global myconn
     mycurs = myconn.cursor(buffered=True)
-    res = mycurs.execute(f"update BookShelf set {f"bookname='{bookName}'" if bookName else ""} {"and" if bookName and bookAuthor else ""} {f"bookauthor='{bookAuthor}'" if bookAuthor else ""} {"and" if bookAuthor and stock else ""} {f"stock={stock}" if stock!=None else ""} where bookid={bookid})")
+    res = mycurs.execute(f"update BookShelf set {f"bookname='{bookName}'" if bookName else ""} {"and" if bookName and bookAuthor else ""} \
+        {f"bookauthor='{bookAuthor}'" if bookAuthor else ""} {"and" if bookAuthor and stock else ""} {f"stock={stock}" if stock!=None else ""} where bookid={bookid})")
     return True
 
 @eel.expose
 def listBooks(bookName=None,bookAuthor=None):
     global myconn
     mycurs = myconn.cursor(buffered=True)
-    mycurs.execute(f'select bookid,bookname,bookauthor,stock,CONVERT(bookPic USING utf8) from BookShelf {"where" if bookAuthor or bookName else ""} {f'bookname like "%{bookName}%"' if bookName else ""} {"and" if bookAuthor and bookName else ""} {f'bookauthor like "%{bookAuthor}%"' if bookAuthor else ""}')
+    mycurs.execute(f'select bookid,bookname,bookauthor,stock,CONVERT(bookPic USING utf8) from BookShelf {"where" if bookAuthor or bookName else ""}\
+        {f'bookname like "%{bookName}%"' if bookName else ""} {"and" if bookAuthor and bookName else ""} {f'bookauthor like "%{bookAuthor}%"' if bookAuthor else ""}')
     res = mycurs.fetchall()
     return res
 
@@ -236,5 +239,6 @@ def deleteBook(bookid):
 
 
 eel.init("gui")
-#myconn = dbConnect("localhost","root","root")
-eel.start("index.html")
+myconn = dbConnect("localhost","root","root")
+if myconn != None:
+    eel.start("login.html")
